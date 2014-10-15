@@ -1,0 +1,12 @@
+#CUBRID
+#jdbc.driverClassName=cubrid.jdbc.driver.CUBRIDDriver
+#jdbc.url=jdbc:cubrid:112.108.40.151:30000:smsc:::
+#jdbc.username=dba
+#jdbc.password=smsc
+
+
+#MySQL
+jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://112.108.40.151:3306/smsc?characterEncoding=utf8&useUnicode=true&mysqlEncoding=utf8autoReconnect=true
+jdbc.username=root
+jdbc.password=smsc

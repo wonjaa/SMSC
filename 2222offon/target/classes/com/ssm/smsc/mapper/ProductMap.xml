@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductDao">
+	<resultMap id="ProductResult" type="com.ssm.smsc.domain.Product">
+		<result property="product_no" column="product_no" />
+		<result property="name" column="name" />
+		<result property="desc" column="desc" />
+		<result property="number" column="number" />
+	</resultMap>
+
+	<select id="getAllProductData" resultMap="ProductResult">
+		SELECT
+		product_no,
+		[name],
+		[desc],
+		number
+		FROM product
+	</select>
+
+	<select id="getProductData" resultType="com.ssm.smsc.domain.Product"
+		parameterType="Integer">
+		SELECT
+		product_no,
+		[name],
+		[desc],
+		number
+		FROM product
+		WHERE [product_no] ='${value}'
+	</select>
+	
+	<select id="getTotalProductNum" resultType="Integer">
+		SELECT
+		count(*)
+		FROM product
+	</select>
+
+	<update id="updateProductData" parameterType="com.ssm.smsc.domain.Product">
+		UPDATE
+		product
+		SET
+		[name]='${name}',
+		[desc]='${desc}',
+		number=${number}
+		WHERE
+		[product_no]='${product_no}';
+	</update>
+	
+	<insert id="insertProductData" parameterType="com.ssm.smsc.domain.Product">
+		INSERT INTO 
+		product 
+		(product_no, [name], [desc], number) 
+		VALUES 
+		(${product_no}, '${name}', '${desc}', ${number});
+
+	</insert>
+	
+	<delete id="deleteProductData" parameterType="Integer">
+		DELETE
+		FROM
+		product
+		WHERE
+		product_no = ${value}
+	</delete>
+
+</mapper>

@@ -1,0 +1,60 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<!--<![endif]-->
+<head>
+<title>SMSC | Spring MVC Source Customizing</title>
+
+<!-- Meta -->
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<meta name="description" content=""></meta>
+<meta name="author" content=""></meta>
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.ico"></link>
+
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet" href="./resources/assets/css/bootstrap.min.css"></link>
+
+
+</head>
+
+<body>
+<div class="container" style="margin-top:20px;">
+		<div class="row">
+			sdf
+		</div>
+		<!--/row-->
+	</div>
+
+ 
+
+
+
+	<!-- JS Global Compulsory -->
+	<script type="text/javascript"
+		src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript"
+		src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/assets/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			App.init();
+			ContactPage.initMap();
+			CirclesMaster.initCirclesMaster1();
+		});
+	</script>
+	<!--[if lt IE 9]>
+    <script src="./resources/assets/plugins/respond.js"></script>
+    <script src="./resources/assets/plugins/html5shiv.js"></script>
+<![endif]-->
+
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+package com.ssm.smsc.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class ConnectTestDB {
+
+	public void connectTest() {
+
+		Connection conn;
+		Statement stmt = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException ea) {
+			System.err.print("ClassNotFoundException: ");
+		}
+
+		try {
+			String jdbcUrl = "jdbc:mysql://localhost:3306/smsc";// 사용하는 데이터베이스명을
+																// 포함한 url
+			String userId = "root";// 사용자계정
+			String userPass = "smsc";// 사용자 패스워드
+
+			conn = DriverManager.getConnection(jdbcUrl, userId, userPass);// Connection
+																			// 객체를
+																			// 얻어냄
+
+			stmt = conn.createStatement();// Statement 객체를 얻어냄
+
+			System.out.println("제대로 연결되었습니다");// 성공시 화면에 표시됨
+
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println("SQLException: " + e.getMessage());
+		}
+	}
+
+	public void selectQuery(){
+		// JDBC driver name and database URL
+		   String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+		   String DB_URL = "jdbc:mysql://localhost:3306/smsc";
+
+		   //  Database credentials
+		   String USER = "root";
+		   String PASS = "smsc";
+		   
+		   
+		   Connection conn = null;
+		   PreparedStatement stmt = null;
+		   try{
+		      //STEP 2: Register JDBC driver
+		      Class.forName("com.mysql.jdbc.Driver");
+
+		      //STEP 3: Open a connection
+		      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+		      
+		      //STEP 4: Execute a query
+		      
+
+		      String sql = "SELECT id FROM user WHERE id = ? AND pw = ?";
+		      
+		      stmt = conn.prepareStatement(sql);
+		      stmt.setString(1, "abc");
+		      stmt.setString(2, "1234");
+		      
+		      ResultSet rs = stmt.executeQuery();
+		      //STEP 5: Extract data from result set
+		      while(rs.next()){
+		         //Retrieve by column name
+		         String id  = rs.getString("id");
+		         
+		         //Display values
+		         System.out.print("IDsms?????????: " + id);
+		         
+		      }
+		      rs.close();
+		   }catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		   }catch(Exception e){
+		      //Handle errors for Class.forName
+		      e.printStackTrace();
+		   }finally{
+		      //finally block used to close resources
+		      try{
+		         if(stmt!=null)
+		            conn.close();
+		      }catch(SQLException se){
+		      }// do nothing
+		      try{
+		         if(conn!=null)
+		            conn.close();
+		      }catch(SQLException se){
+		         se.printStackTrace();
+		      }//end finally try
+		   }//end try
+		   System.out.println("Goodbye!");
+		}//end main
+	
+}

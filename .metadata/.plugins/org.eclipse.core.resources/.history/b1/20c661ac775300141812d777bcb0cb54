@@ -1,0 +1,5 @@
+package com.ssm.smsc.util;
+
+public class ConnectTestDB {
+
+}

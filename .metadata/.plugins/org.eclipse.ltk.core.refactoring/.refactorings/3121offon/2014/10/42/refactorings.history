@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;3122offon/src/main/resources/com.ssm.smsc.mapper&apos;&#x0D;&#x0A;- Original project: &apos;3121offon&apos;&#x0D;&#x0A;- Destination element: &apos;3122offon/src/main/resources/com.ssm.smsc.mapper&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     ProductMap.xml&#x0D;&#x0A;     UserMap.xml" description="Copy files" destination="=3122offon/src\/main\/resources&lt;com.ssm.smsc.mapper" element1="src/main/resources/com/ssm/smsc/mapper/ProductMap.xml" element2="src/main/resources/com/ssm/smsc/mapper/UserMap.xml" files="2" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1413099768682" units="0" version="1.0"/>
+</session>
