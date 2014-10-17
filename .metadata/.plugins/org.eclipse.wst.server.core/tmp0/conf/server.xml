@@ -131,7 +131,7 @@
                prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="false"/>
         -->
 
-      <Context docBase="C:\Users\WONJA\Documents\SMSC\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\WONJA\Documents\SMSC\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\2212offon" path="/2212offon" reloadable="true" source="org.eclipse.jst.jee.server:2212offon"/></Host>
+      <Context docBase="C:\Users\WONJA\Documents\SMSC\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\WONJA\Documents\SMSC\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\5212offon" path="/5212offon" reloadable="true" source="org.eclipse.jst.jee.server:5212offon"/></Host>
     </Engine>
   </Service>
 </Server>
