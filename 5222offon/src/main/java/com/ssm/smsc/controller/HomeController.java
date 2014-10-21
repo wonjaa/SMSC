@@ -89,7 +89,7 @@ public class HomeController {
 		session.getAttribute("userInfo");
 		smscService.updateProductData(product);
 				
-		return "product_m";
+		return "redirect:../productlist";
 	}
 	
 

@@ -1,0 +1,75 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<annotation-driven />
+	<context:component-scan base-package="com.ssm.smsc.controller" />
+	<context:component-scan base-package="com.ssm.smsc.service" />
+	<context:component-scan base-package="com.ssm.smsc.dao" />
+
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<beans:bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:messages" />
+		<beans:property name="defaultEncoding" value="UTF-8" />
+	</beans:bean>
+	<beans:bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="/WEB-INF/hibernate/jdbc.properties" />
+
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
+		p:url="${jdbc.url}" p:username="${jdbc.username}" p:password="${jdbc.password}" />
+
+
+	
+
+	<beans:bean name="productDao" class="com.ssm.smsc.dao.ProductDaoImpl">
+	</beans:bean>
+	<beans:bean name="userDao" class="com.ssm.smsc.dao.UserDaoImpl">
+	</beans:bean>
+	<beans:bean name="smscService" class="com.ssm.smsc.service.SmscServiceImpl"></beans:bean>
+
+	
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<beans:bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+
+	<!-- interceptor 설정. -->
+	<interceptors>
+
+		<!-- admin session interceptor 설정. -->
+		<!-- 어드민 로그인을 체크하고 로그아웃 상태일 경우 메인페이지로 보내는 인터셉터를 등록. -->
+		<interceptor>
+			<!-- /* 형태의 요청에 한해서만 인터셉트 적용 -->
+			<mapping path="/productlist/*" />
+			<mapping path="/productlist" />
+			<mapping path="/new_product" />
+			<beans:bean class="com.ssm.smsc.interceptor.SessionInterceptor" />
+		</interceptor>
+
+	</interceptors>
+</beans:beans>

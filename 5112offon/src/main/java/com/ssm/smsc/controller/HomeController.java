@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ssm.smsc.domain.Product;
 import com.ssm.smsc.domain.User;
 import com.ssm.smsc.service.SmscService;
-import com.ssm.smsc.util.ConnectTestDB;
 
 /**
  * Handles requests for the application home page.
@@ -39,9 +38,6 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(User user, Model model) {
 		
-		ConnectTestDB ctd = new ConnectTestDB();
-		ctd.connectTest();
-		
 		
 		return "login";
 	}
@@ -60,10 +56,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/productlist", method = RequestMethod.GET)
-	public String productlist(User user, Model model, HttpSession session) {
+	public String productlist(User user, Model model) {
 		
-		User userInfo = (User) session.getAttribute("userInfo");
-		model.addAttribute("userid",userInfo.getId());
+		model.addAttribute("userid",user.getId());
 		List<Product> productList = smscService.getAllProductData();
 		
 		System.out.println("productList:"+productList.toString());
@@ -76,12 +71,11 @@ public class HomeController {
 	@RequestMapping(value = "productlist/{product_no}", method = RequestMethod.GET)
 	public String product_modify(@PathVariable("product_no") Integer product_no, Model model, HttpSession session) {
 		logger.info("product_no:"+product_no);
-		User userInfo = (User)session.getAttribute("userInfo");
+		session.getAttribute("userInfo");
 		
 		Product product = new Product();
 		product = smscService.getProductData(product_no);
 		
-		model.addAttribute("userid", userInfo.getId());
 		model.addAttribute("product", product);
 		
 		return "product_m";

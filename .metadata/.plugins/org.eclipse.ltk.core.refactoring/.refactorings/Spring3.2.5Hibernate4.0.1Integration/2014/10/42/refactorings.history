@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;hibernate.cfg.xml&apos; to &apos;hibernate&apos;&#x0D;&#x0A;- Original project: &apos;Spring3.2.5Hibernate4.0.1Integration&apos;&#x0D;&#x0A;- Destination element: &apos;hibernate&apos;&#x0D;&#x0A;- Original element: &apos;hibernate.cfg.xml&apos;" description="Copy file" element1="src/hibernate.cfg.xml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1413542533639" target="/1232offon/src/main/webapp/WEB-INF/hibernate" units="0" version="1.0"/>
+</session>

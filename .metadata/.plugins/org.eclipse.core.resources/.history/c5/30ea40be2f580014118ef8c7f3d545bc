@@ -1,0 +1,49 @@
+package com.ssm.smsc.dao;
+
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Example;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ssm.smsc.domain.User;
+
+public class UserDaoImpl implements UserDao{
+
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	@Override
+	public void insertUserData(User user) {
+		this.sessionFactory.getCurrentSession().saveOrUpdate("User",user);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean checkUserData(User user) {
+		String id = null;
+		boolean check = false;
+		try{
+			List<User> results = this.sessionFactory.getCurrentSession().createQuery("from User where id=:id").setParameter("id", user.getId()).list();
+			id =  results.get(0).getId();
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+			check = false;
+		}
+		if(id.equals(user.getId())){
+			check = true;
+		}
+		return check;
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> selectAllUserData() {
+		return this.sessionFactory.getCurrentSession().createQuery("from User").list();
+	}
+
+	
+
+}

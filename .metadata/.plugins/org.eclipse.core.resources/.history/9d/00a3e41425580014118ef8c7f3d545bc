@@ -1,0 +1,62 @@
+package com.ssm.smsc.dao;
+
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ssm.smsc.domain.Product;
+import com.ssm.smsc.domain.User;
+
+public class UserDaoImpl implements UserDao{
+
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	@Override
+	public void insertUserData(User user) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO [user] (id, pw, [name],age) VALUES ('"+user.getId()+"','"+user.getPw()+"','"+user.getName()+"',"+user.getAge()+")";
+        System.out.println("sql::"+sql.toString());
+        Query query = this.sessionFactory.getCurrentSession().createSQLQuery(sql);
+        
+        query.executeUpdate();
+        
+        
+        System.out.println("complete insert");
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean checkUserData(User user) {
+		// TODO Auto-generated method stub
+		String id = null;
+		boolean check = false;
+		try{
+			
+			List<User> results = this.sessionFactory.getCurrentSession().createQuery("from User where id=:id").setParameter("id", user.getId()).list();
+			id =  results.get(0).getId();
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+			check = false;
+		}
+		if(id.equals(user.getId())){
+			check = true;
+		}
+		return check;
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> selectAllUserData() {
+		// TODO Auto-generated method stub
+		return this.sessionFactory.getCurrentSession().createQuery("from User").list();
+	}
+
+	
+
+}

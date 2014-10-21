@@ -1,0 +1,107 @@
+package com.ssm.smsc.dao;
+
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ssm.smsc.domain.Product;
+import com.ssm.smsc.domain.User;
+import com.ssm.smsc.util.HibernateUtil;
+
+public class ProductDaoImpl implements ProductDao {
+
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	//
+	// @Override
+	// public void addEmployee(EmployeeEntity employee) {
+	// this.sessionFactory.getCurrentSession().save(employee);
+	// }
+	//
+	// @SuppressWarnings("unchecked")
+	// @Override
+	// public List<EmployeeEntity> getAllEmployees() {
+	// return
+	// this.sessionFactory.getCurrentSession().createQuery("from EmployeeEntity").list();
+	// }
+	//
+	// @Override
+	// public void deleteEmployee(Integer employeeId) {
+	// EmployeeEntity employee = (EmployeeEntity)
+	// sessionFactory.getCurrentSession().load(
+	// EmployeeEntity.class, employeeId);
+	// if (null != employee) {
+	// this.sessionFactory.getCurrentSession().delete(employee);
+	// }
+	// }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Product> getAllProductData() {
+		// TODO Auto-generated method stub
+		List<Product> pList =null;
+		try{
+		pList = this.sessionFactory.getCurrentSession().createQuery("from Product").list();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+		return pList;
+	}
+
+	@Override
+	public Product getProductData(Integer product_no) {
+		// TODO Auto-generated method stub
+		Query query = this.sessionFactory.getCurrentSession().createQuery(
+				"from Product where product_no = :product_no");
+		query.setParameter("product_no", product_no);
+
+		Product product = (Product) query.list().get(0);
+
+		return product;
+	}
+
+	@Override
+	public void updateProductData(Product product) {
+//		System.out.println("in"+product.toString());
+//		String sql = "update Product set [name] = '"+product.getName()+"', [desc] = '"+product.getDesc()+"', number = "+product.getNumber()+" where product_no = "+product.getProduct_no();
+//		System.out.println("sql:::"+sql.toString());
+//		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(sql);
+//		
+//		query.executeUpdate();
+		
+		this.sessionFactory.getCurrentSession().update("Product",product);
+	}
+
+	@Override
+	public void insertProductData(Product product) {
+		this.sessionFactory.getCurrentSession().save("Product",product);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public int getTotalProductNum() {
+		// TODO Auto-generated method stub
+		String hql = "SELECT count(p) FROM Product p";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		List results = query.list();
+		return Integer.parseInt(results.get(0).toString());
+		
+	}
+
+	@Override
+	public void deleteProductData(Integer product_no) {
+		String hql = "DELETE FROM Product "  + 
+	             "WHERE product_no = :product_no";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("product_no", product_no);
+		int result = query.executeUpdate();
+		System.out.println("Rows affected: " + result);
+	}
+
+}

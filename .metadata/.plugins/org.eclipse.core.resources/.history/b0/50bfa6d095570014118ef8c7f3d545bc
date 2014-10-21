@@ -1,0 +1,11 @@
+<hibernate-mapping>
+     <class name="com.ssm.smsc.User" table="[user]">
+
+      <!-- 기본키가 되는 필드 -->
+      <id column="ID" name="id"> </id>
+
+      <property column="SEQ" name="seq" type="int"/>
+      <property column="PWD" generated="never" lazy="false" name="password" type="string"/>
+      <property column="NAME" generated="never" lazy="false" name="name" type="string"/>
+     </class>
+    </hibernate-mapping>

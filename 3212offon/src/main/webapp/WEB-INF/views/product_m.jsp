@@ -43,7 +43,7 @@
 				<div class="row">
 					<div class="col-md-offset-4 col-md-4 col-md-offset-4">
 						<form id="product" name="product" accept-charset="UTF-8"
-							action="/3212offon/productlist/${product.product_no}" method="post">
+							th:action="${product.product_no}" method="post">
 
 							<div style="text-align: center;">
 								<h4>
